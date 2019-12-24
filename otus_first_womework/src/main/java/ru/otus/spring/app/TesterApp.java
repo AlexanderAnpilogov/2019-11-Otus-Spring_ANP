@@ -1,8 +1,7 @@
-package ru.otus.spring.App;
+package ru.otus.spring.app;
 
-import ru.otus.spring.CSV.Commands;
-import ru.otus.spring.Student.Person;
-import ru.otus.spring.Student.Stud;
+import ru.otus.spring.csv.Commands;
+import ru.otus.spring.student.Person;
 
 
 import java.io.BufferedReader;
@@ -13,8 +12,15 @@ public class TesterApp {
     private final Commands csv;
     private Person student;
 
-    public TesterApp(Commands csv) {
+    public TesterApp(Commands csv, Person student) {
         this.csv = csv;
+        this.student = student;
+    }
+
+    public void startApplication() throws IOException {
+        identifyStudent();
+        showQuestions();
+        testEnding();
     }
 
     public void showQuestions() throws IOException {
@@ -31,13 +37,12 @@ public class TesterApp {
         System.out.println("введите имя и фамилию...");
         String nama = reader.readLine();
         String surNama = reader.readLine();
-        student = new Stud();
         student.setNama(nama);
         student.setSurNama(surNama);
     }
 
     public void testEnding() {
         System.out.println("                                " + student.getNama() + " " + student.getSurnama());
-        csv.getUserMark();
+       // csv.getUserMark();
     }
 }

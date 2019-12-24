@@ -1,4 +1,4 @@
-package ru.otus.spring.Student;
+package ru.otus.spring.student;
 
 public interface Person {
     String name = null;

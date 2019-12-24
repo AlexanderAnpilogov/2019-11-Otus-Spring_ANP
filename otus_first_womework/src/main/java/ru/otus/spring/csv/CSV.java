@@ -1,4 +1,4 @@
-package ru.otus.spring.CSV;
+package ru.otus.spring.csv;
 
 
 import java.io.*;
