@@ -1,9 +1,21 @@
-package ru.otus.spring.CSV;
+package ru.otus.spring.csv;
 
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 
+@PropertySource("classpath:/info.property")
+@Service
 public class CSV implements Commands {
+    @Value("${my.csv}")
+    private String path;
+
+
+
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private String[] userAnswerMassive = new String[5];
     private String[] trueAnswers = {"1,3,4", "2", "3", "4", "3,2"};
@@ -39,7 +51,8 @@ public class CSV implements Commands {
 
     @Override
     public void printQuestions() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("E:\\OTUS2019\\src\\main\\resources\\questions.csv"));
+        //снизу в аргументе хочу указать @Value("${my.csv}") но @Value not allowed here................
+        BufferedReader reader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(path)));
         String a;
         while (!(a = reader.readLine()).isEmpty()) {
             System.out.println(a);

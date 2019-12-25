@@ -1,20 +1,28 @@
-package ru.otus.spring.App;
+package ru.otus.spring.app;
 
-import ru.otus.spring.CSV.Commands;
-import ru.otus.spring.Student.Person;
-import ru.otus.spring.Student.Stud;
-
+import org.springframework.stereotype.Controller;
+import ru.otus.spring.csv.Commands;
+import ru.otus.spring.student.Person;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+@Controller
 public class TesterApp {
     private final Commands csv;
     private Person student;
 
-    public TesterApp(Commands csv) {
+    //@AutoWired здесь безопасен ибо в данной недопрограмме создаётся 1 экземпляр(бин) PersonDao...  ПРАВИЛЬНО понимаю?
+    public TesterApp(Commands csv, Person student) {
         this.csv = csv;
+        this.student = student;
+    }
+
+    public void startApplication() throws IOException {
+        identifyStudent();
+        showQuestions();
+        testEnding();
     }
 
     public void showQuestions() throws IOException {
@@ -31,13 +39,11 @@ public class TesterApp {
         System.out.println("введите имя и фамилию...");
         String nama = reader.readLine();
         String surNama = reader.readLine();
-        student = new Stud();
         student.setNama(nama);
         student.setSurNama(surNama);
     }
 
     public void testEnding() {
         System.out.println("                                " + student.getNama() + " " + student.getSurnama());
-        csv.getUserMark();
     }
 }
