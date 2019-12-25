@@ -1,7 +1,9 @@
 package ru.otus.spring.student;
 
 
+import org.springframework.stereotype.Service;
 
+@Service
 public class Stud implements Person {
     private String name;
     private String surname;
